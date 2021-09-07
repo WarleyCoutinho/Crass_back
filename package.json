@@ -9,7 +9,6 @@
     "start": "ENV_SILENT=true node serve",
     "test": "node ace test"
   },
-
   "keywords": [
     "adonisjs",
     "adonis-app"
