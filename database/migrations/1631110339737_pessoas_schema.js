@@ -5,18 +5,18 @@ const Schema = use('Schema')
 
 class PessoasSchema extends Schema {
   up () {
-    this.create('pessoas', (table) => {
-      table.increments()
+    this.table('pessoas', (table) => {
       table.string('name',80).notNullable()
       table.string('cpf',15).notNullable()
       table.string('sexo',10).notNullable()
       table.decimal('datanascimento',10).notNullable()
-      table.timestamps()
     })
   }
 
   down () {
-    this.drop('pessoas')
+    this.table('pessoas', (table) => {
+      // reverse alternations
+    })
   }
 }
 

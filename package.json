@@ -2,7 +2,7 @@
   "name": "adonis-api-app",
   "version": "4.1.0",
   "adonis-version": "4.1.0",
-  "description": "Criando uma ReSst API com Adonisjs e PostgreSQL para o Crass pre-configured JWT",
+  "description": "Desenvolvido por Warley Coutinho Pereira dos Santos",
   "main": "index.js",
   "scripts": {
     "dev": "adonis serve --dev",
@@ -13,11 +13,11 @@
     "adonisjs",
     "adonis-app"
   ],
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "Warley_Coutinho",
+  "license": "MIT",
   "private": true,
   "dependencies": {
-    "@adonisjs/ace": "^11.0.4",
+    "@adonisjs/ace": "^5.0.8",
     "@adonisjs/auth": "^3.0.7",
     "@adonisjs/bodyparser": "~2.0.9",
     "@adonisjs/cors": "^1.0.7",

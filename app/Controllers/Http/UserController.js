@@ -10,6 +10,17 @@ class UserController {
 
     return user
   }
+
+  async list(){
+    return await User.all();
+ }
+
+ async show({params}){
+   return await User.find(params.id);
+ }
+
+
+
 }
 
 module.exports = UserController

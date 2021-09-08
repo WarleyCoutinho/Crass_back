@@ -1,35 +1,36 @@
 'use strict'
-const Pessoa = use('App/Models/Pessoa');
+
+const Pessoa = use("App/Models/Pessoa");
 
 class PessoaController {
 
   async store({ request }){
 
-    const dataToCreate = request.only(['name','cpf','sexo',
-    'datanascimento']);
+    const dataToCreate = request.only(["name","cpf","sexo","datanascimento"])
 
-       return await Pessoa.create(dataToCreate);
+       const Pessoa = await Pessoa.create(dataToCreate)
+       return Pessoa
+
    }
 
 
-  async listar(){
+  async list(){
      return await Pessoa.all();
   }
 
-  async buscar({params}){
+  async show({params}){
     return await Pessoa.find(params.id);
   }
 
-  async alterar({params,request}){
+  async Update({params,request}){
     const pessoa = await Pessoa.finOrFail(params.id);
-    const dataToUpddate = request.only(['name','cpf','sexo','datanascimento']);
-
-    pessoa.merge(dataToUpddate);
+    const dataToUpdate = request.only(["name","cpf","sexo","datanascimento"]);
+    pessoa.merge(dataToUpdate);
     await pessoa.save();
     return pessoa;
   }
 
-  async apagar({ params }){
+  async remove({ params }){
 
     const pessoa = await Pessoa.finOrFail(params.id);
 

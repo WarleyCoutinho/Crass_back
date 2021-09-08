@@ -17,17 +17,26 @@
 const Route = use('Route')
 
 Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
+  return { greeting: 'Warley Coutinho' }
 })
 
+
 Route.post('/users', 'UserController.create')
+Route.get('/users', 'UserController.list')
+Route.get('/users/:id', 'UserController.show')
+//Route.put('/users/:id', 'UserController.Update')
+//Route.delete('/users/:id', 'UserController.remove')
+
+// Rota de autentificão dentro da seçães
 Route.post('/sessions', 'SessionController.create')
 
 
-Route.get('/pessoas', 'PessoaController.listar')
-Route.post('/pessoas', 'PessoaController.store')
-Route.get('/pessoas/:id', 'PessoaController.buscar')
-Route.put('/pessoas/:id', 'PessoaController.alterar')
-Route.delete('/pessoas/:id', 'PessoaController.apagar')
 
+
+// Rotas de pessoas
+Route.get('/pessoas', 'PessoaController.list')
+Route.get('/pessoas/:id', 'PessoaController.show')
+Route.post('/pessoas', 'PessoaController.store')
+Route.put('/pessoas/:id', 'PessoaController.Update')
+Route.delete('/pessoas/:id', 'PessoaController.remove')
 
