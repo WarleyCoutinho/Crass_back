@@ -1,8 +1,8 @@
-const app = require("express")()
-const consign = require("consign")
-const db = require("./config/db")
+const app = require('express')()
+const consign = require('consign')
+const db = require('./config/db')
 
-app.db = db;
+app.db = db
 
 consign()
 //.include('./config/passport.js')
@@ -14,5 +14,5 @@ consign()
 .into(app)
 
 app.listen(3000, () => {
-  console.log("Backend executando...")
+  console.log("Backend sendo executando...")
 });

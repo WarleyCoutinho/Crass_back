@@ -5,7 +5,6 @@ exports.up = function (knex, Promise) {
       table.string('name').notNull()
       table.string('email').notNull().unique()
       table.string('password').notNull()
-      //table.string('confirmPassword').notNull()
       table.boolean('admin').notNull().defaultTo(false)
   })
 };
