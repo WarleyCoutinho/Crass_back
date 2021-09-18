@@ -1,11 +1,3 @@
-//module.exports = (app) => {
-
-//const save = (req, res) => {
-//  res.send("user save");
-// };
-// return { save };
-//};
-
 const bcrypt = require("bcrypt-nodejs");
 
 module.exports = (app) => {
@@ -20,8 +12,8 @@ module.exports = (app) => {
     const user = { ...req.body };
     if (req.params.id) user.id = req.params.id;
 
-    //  if(!req.originalUrl.startsWith('/users')) user.admin = false
-    // if(!req.user || !req.user.admin) user.admin = false
+     if(!req.originalUrl.startsWith('/users')) user.admin = false
+     if(!req.user || !req.user.admin) user.admin = false
 
     try {
       existsOrError(user.name, "Nome não informado");
@@ -49,7 +41,7 @@ module.exports = (app) => {
         .db("users")
         .update(user)
         .where({ id: user.id })
-        //.whereNull('deletedAt')
+        .whereNull('deletedAt')
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
     } else {
@@ -65,7 +57,7 @@ module.exports = (app) => {
     app
       .db("users")
       .select("id", "name", "email", "admin")
-      //.whereNull('deletedAt')
+      .whereNull('deletedAt')
       .then((users) => res.json(users))
       .catch((err) => res.status(500).send(err));
   };
@@ -74,7 +66,7 @@ module.exports = (app) => {
       .db("users")
       .select("id", "name", "email", "admin")
       .where({ id: req.params.id })
-      // .whereNull('deletedAt')
+       .whereNull('deletedAt')
       .first()
       .then((user) => res.json(user))
       .catch((err) => res.status(500).send(err));
@@ -89,7 +81,7 @@ module.exports = (app) => {
 
       const rowsUpdated = await app
         .db("users")
-        // .update({deletedAt: new Date()})
+         .update({deletedAt: new Date()})
         .where({ id: req.params.id });
       existsOrError(rowsUpdated, "Usuário não foi encontrado.");
 
