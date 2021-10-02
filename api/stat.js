@@ -1,6 +1,5 @@
 
 // Falta ainda implementar e liberar lá no junto ao schedule no  index.js
-
 //module.exports = app => {
  //   const Stat = app.mongoose.model('Stat', {
   //      users: Number,
