@@ -9,10 +9,19 @@ module.exports = app => {
 
         try {
             existsOrError(article.name, 'Nome não informado')
-            existsOrError(article.description, 'Descrição não informada')
-            existsOrError(article.categoryId, 'Categoria não informada')
-            existsOrError(article.userId, 'Autor não informado')
-            existsOrError(article.content, 'Conteúdo não informado')
+            existsOrError(article.sexo, 'Sexo não informado')
+            existsOrError(article.email, 'Email não informada')
+            existsOrError(article.cpf, 'CPF não informada')
+            existsOrError(article.userId, 'Atendente não informado')
+            existsOrError(article.userId, 'Atendente não informado')
+            existsOrError(article.rua, 'Rua não informado')
+            existsOrError(article.bairro, 'Bairro não informado')
+            existsOrError(article.complemento, 'Complemento não informado')
+            existsOrError(article.cep, 'CEP não informado')
+            existsOrError(article.cidade, 'Cidade não informado')
+            existsOrError(article.estado, 'Cidade não informado')
+            existsOrError(article.pais, 'País não informado')
+           
         } catch(msg) {
             res.status(400).send(msg)
         }
@@ -37,7 +46,7 @@ module.exports = app => {
                 .where({ id: req.params.id }).del()
             
             try {
-                existsOrError(rowsDeleted, 'Artigo não foi encontrado.')
+                existsOrError(rowsDeleted, 'Beneficiario não foi encontrado.')
             } catch(msg) {
                 return res.status(400).send(msg)    
             }
@@ -56,7 +65,7 @@ module.exports = app => {
         const count = parseInt(result.count)
 
         app.db('articles')
-            .select('id', 'name', 'description')
+            .select('id', 'name', 'sexo','email','dtnascimento','rua','bairro','complemento',)
             .limit(limit).offset(page * limit - limit)
             .then(articles => res.json({ data: articles, count, limit }))
             .catch(err => res.status(500).send(err))
@@ -80,7 +89,7 @@ module.exports = app => {
         const ids = categories.rows.map(c => c.id)
 
         app.db({a: 'articles', u: 'users'})
-            .select('a.id', 'a.name', 'a.description', 'a.imageUrl', { author: 'u.name' })
+            .select('a.id', 'a.name','a.sexo', 'a.email','a.cpf', { author: 'u.userId' })
             .limit(limit).offset(page * limit - limit)
             .whereRaw('?? = ??', ['u.id', 'a.userId'])
             .whereIn('categoryId', ids)

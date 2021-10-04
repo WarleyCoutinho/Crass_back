@@ -14,6 +14,7 @@ exports.up = function(knex, Promise) {
       table.string('cep').notNull()
       table.string('cidade').notNull()
       table.string('estado').notNull()
+      table.string('pais').notNull()
       table.binary('content').notNull()
       table.integer('userId').references('id')
           .inTable('users').notNull()
