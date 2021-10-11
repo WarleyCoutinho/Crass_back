@@ -8,8 +8,12 @@ exports.up = function (knex, Promise) {
       table.string('email').notNull()
       table.string('dtNascimento').notNull()
       table.string('naturalidade').notNull()
+      table.string('content').notNull()
       table.integer('userId').references('id')
       .inTable('users').notNull() 
+      table.integer('categoryId').references('id')
+      .inTable('categories').notNull()
+      
       
   })
 };

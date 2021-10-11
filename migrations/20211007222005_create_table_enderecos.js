@@ -9,7 +9,7 @@ exports.up = function(knex, Promise) {
       table.string('cidade').notNull()
       table.string('estado').notNull()
       table.string('pais').notNull()
-      table.integer('pesssoaId').references('id')
+      table.integer('pessoaId').references('id')
           .inTable('pessoas')
   })
 };

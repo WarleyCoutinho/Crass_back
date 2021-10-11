@@ -51,13 +51,14 @@ module.exports = (app) => {
     app
       .db("pessoas")
       .select(
-        "id",
+       "id",
         "name",
         "sexo",
         "cpf",
         "email",
         "dtNascimento",
-        "naturalidade"
+        "naturalidade",
+        "content"
       )
       .from("pessoas")
       .then((pessoa) => res.json(pessoa))
@@ -68,13 +69,14 @@ module.exports = (app) => {
     app
       .db("pessoas")
       .select(
-        "id",
+       "id",
         "name",
         "sexo",
         "cpf",
         "email",
         "dtNascimento",
-        "naturalidade"
+        "naturalidade",
+        "content"
       )
       .where({ id: req.params.id })
       .first()
