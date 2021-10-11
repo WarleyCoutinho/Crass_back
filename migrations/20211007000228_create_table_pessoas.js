@@ -9,11 +9,7 @@ exports.up = function (knex, Promise) {
       table.string('dtNascimento').notNull()
       table.string('naturalidade').notNull()
       table.integer('userId').references('id')
-      .inTable('users').notNull()
-       
-            
-       
-      
+      .inTable('users').notNull() 
       
   })
 };

@@ -3,7 +3,7 @@ module.exports = (app) => {
 
   const save = (req, res) => {
     const pessoa = { ...req.body };
-    if (req.params.id) pessoa.pessoaId = req.params.id;
+    if (req.params.id) pessoa.id = req.params.id;
 
     try {
       existsOrError(pessoa.name, "Nome não informado");
@@ -15,11 +15,11 @@ module.exports = (app) => {
       return res.status(400).send(msg);
     }
 
-    if (pessoa.pessoaId) {
+    if (pessoa.id) {
       app
         .db("pessoas")
         .update(pessoa)
-        .where({ pessoaId: pessoa.pessoaId })
+        .where({ id: pessoa.id })
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
     } else {
@@ -37,7 +37,7 @@ module.exports = (app) => {
 
       const rowsDeleted = await app
         .db("pessoas")
-        .where({ pessoaId: req.params.id })
+        .where({ id: req.params.id })
         .del();
       existsOrError(rowsDeleted, "Beneficiario não foi encontrado.");
 
@@ -48,15 +48,16 @@ module.exports = (app) => {
   };
 
   const get = (req, res) => {
-    app.db
+    app
+      .db("pessoas")
       .select(
-        "pessoa.pessoaId",
-        "pessoa.name",
-        "pessoa.sexo",
-        "pessoa.cpf",
-        "pessoa.email",
-        "pessoa.dtNascimento",
-        "pessoa.naturalidade"
+        "id",
+        "name",
+        "sexo",
+        "cpf",
+        "email",
+        "dtNascimento",
+        "naturalidade"
       )
       .from("pessoas")
       .then((pessoa) => res.json(pessoa))
@@ -66,7 +67,16 @@ module.exports = (app) => {
   const getById = (req, res) => {
     app
       .db("pessoas")
-      .where({ pessoaId: req.params.id })
+      .select(
+        "id",
+        "name",
+        "sexo",
+        "cpf",
+        "email",
+        "dtNascimento",
+        "naturalidade"
+      )
+      .where({ id: req.params.id })
       .first()
       .then((pessoa) => res.json(pessoa))
       .catch((err) => res.status(500).send(err));
