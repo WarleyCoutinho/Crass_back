@@ -77,6 +77,7 @@ module.exports = (app) => {
         "dtNascimento",
         "naturalidade",
         "content"
+        
       )
       .where({ id: req.params.id })
       .first()
