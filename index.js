@@ -15,6 +15,10 @@ consign()
   .then("./config/routes.js")
   .into(app);
 
+  // app.get('/', (req,res) => {
+  //   res.send("this is a sample express app")
+  // })
+
 const port = normalizaPort(process.env.PORT || "3000");
 function normalizaPort(val) {
   const port = parseInt(val, 10);
