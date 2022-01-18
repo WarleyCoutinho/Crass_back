@@ -2,23 +2,15 @@ const app = require("express")();
 const consign = require("consign");
 const db = require("./config/db");
 
-
 app.db = db;
 
 consign()
- 
   .include("./config/passport.js")
   .then("./config/middlewares.js")
   .then("./api/validation.js")
   .then("./api")
   .then("./config/routes.js")
   .into(app);
-
- 
-  app.get('/', (require, res) =>  {
-    res.send(`Projeto Api Crass  Back-End !`);
-  
-  });
 
 const port = normalizaPort(process.env.PORT || "3000");
 function normalizaPort(val) {
@@ -33,7 +25,5 @@ function normalizaPort(val) {
 }
 
 app.listen(port, () => {
-  console.log(
-    `Projeto Crass Final-Backend.Sendo Executando, na porta ${port}.`
-  );
+  console.log(`Crass - Backend Sendo Executando, na porta ${port}.`);
 });
