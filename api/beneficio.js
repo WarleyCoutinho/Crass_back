@@ -6,21 +6,24 @@ module.exports = (app) => {
     if (req.params.id) beneficio.beneficioId = req.params.id;
 
     try {
-      existsOrError(beneficio.name, "O Beneficio deve ser informado!");
+      existsOrError(beneficio.name, ' Beneficio não informado!');
     } catch (msg) {
       return res.status(400).send(msg);
     }
 
     if (beneficio.beneficioId) {
       app
-        .db("beneficios")
+        .db('beneficios')
         .update(beneficio)
-        .where({ beneficioId: beneficio.beneficioId })
+        .where({
+          beneficioId: beneficio.beneficioId,
+        })
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
+      console.log('Eu', beneficioId);
     } else {
       app
-        .db("beneficios")
+        .db('beneficios')
         .insert(beneficio)
         .then((_) => res.status(204).send())
         .catch((err) => res.status(500).send(err));
@@ -29,13 +32,13 @@ module.exports = (app) => {
 
   const remove = async (req, res) => {
     try {
-      existsOrError(req.params.id, "Código do Beneficio não informado.");
+      existsOrError(req.params.id, 'Código do beneficio não informado.');
 
       const rowsDeleted = await app
-        .db("beneficios")
+        .db('beneficios')
         .where({ beneficioId: req.params.id })
         .del();
-      existsOrError(rowsDeleted, "O Beneficio não foi encontrado.");
+      existsOrError(rowsDeleted, 'Beneficio não foi encontrado.');
 
       res.status(204).send();
     } catch (msg) {
@@ -44,16 +47,18 @@ module.exports = (app) => {
   };
 
   const get = (req, res) => {
-    app.db
-      .select("beneficio.beneficioId", "beneficio.name")
-      .from("beneficio")
+    app
+      .db('beneficios')
+      .select('beneficioId', 'name')
+      .from('beneficios')
       .then((beneficio) => res.json(beneficio))
       .catch((err) => res.status(500).send(err));
   };
 
   const getById = (req, res) => {
     app
-      .db("beneficios")
+      .db('beneficios')
+      .select('beneficio.beneficioId', 'beneficio.name')
       .where({ beneficioId: req.params.id })
       .first()
       .then((beneficio) => res.json(beneficio))

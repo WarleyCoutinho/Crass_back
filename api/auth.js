@@ -1,25 +1,29 @@
-const { authSecret } = require("../.env");
-const jwt = require("jwt-simple");
-const bcrypt = require("bcrypt-nodejs");
+const { authSecret } = require('../.env');
+const jwt = require('jwt-simple');
+const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (app) => {
   const signin = async (req, res) => {
     if (!req.body.email || !req.body.password) {
-      return res.status(400).send("Informe usuário e senha!");
+      return res.status(400).send('Informe usuário e senha!');
     }
 
-    const user = await app.db("usuario").where({ email: req.body.email }).whereNull("deletedAt").first();
+    const user = await app
+      .db('usuario')
+      .where({ email: req.body.email })
+      .whereNull('deletedAt')
+      .first();
 
-    if (!user) return res.status(400).send("Usuário não encontrado");
+    if (!user) return res.status(400).send('Usuário não encontrado');
 
     // Compara a senha vinda do request com a do banco
     try {
       const isMatch = bcrypt.compareSync(req.body.password, user.password);
       if (!isMatch) {
-        return res.status(401).send("Email/Senha inválidos!");
+        return res.status(401).send('Email/Senha inválidos!');
       }
     } catch (error) {
-      return res.status(401).send("Email/Senha inválidos!");
+      return res.status(401).send('Email/Senha inválidos!');
     }
 
     const now = Math.floor(Date.now() / 1000);
